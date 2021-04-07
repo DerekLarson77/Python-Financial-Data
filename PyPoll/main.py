@@ -50,7 +50,8 @@ with open(csvpath) as csvfile:
     i = 0
     candidates = []
     candidate_votes = []
-
+    votes_per = []
+    vote_winner = 0
 
     # Read each row in the CSV file.
     for row in csvreader:
@@ -69,10 +70,11 @@ with open(csvpath) as csvfile:
             if str(candidate) == str(name):
                 candidate_count = candidate_votes[i-1] + 1
                 candidate_votes[i-1] = candidate_count
+        if candidate_votes[i-1] > vote_winner:
+            vote_winner = candidate_votes[i-1]
+            winner = candidate
+        votes_per.append(round(candidate_votes[i-1]/total_votes * 100, 3))
 
-
-print("")
-print(candidate_votes)
 
 
 # Print all values to the terminal.
@@ -81,12 +83,13 @@ print("Election Results")
 print("---------------------------------")
 print(f"Total Votes:  {total_votes}")
 print("---------------------------------")
-print(candidates[0])
-print(candidates[1])
-print(candidates[2])
-print(candidates[3])
+
+for i in range(len(candidates)):
+    print(candidates[i] + ": " + str(votes_per[i]) + "%  (" + str(candidate_votes[i]) + ")")
+
 print("---------------------------------")
-#print(f"Winner:  {Winner}")
+print(f"Winner:  {winner}!")
+print(f"With {vote_winner} votes!")
 print("---------------------------------")
 print("")
 
