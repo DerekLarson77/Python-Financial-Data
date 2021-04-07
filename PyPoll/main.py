@@ -64,11 +64,13 @@ with open(csvpath) as csvfile:
         i += 1
         candidate_votes.append(0)
         for row in csvreader:
-            if row[2] == candidate:
+            name = row[2]
+            if str(candidate) == str(name):
                 candidate_count = candidate_votes[i-1] + 1
                 candidate_votes[i-1] = candidate_count
 
 
+print("")
 print(candidate_votes)
 
 
