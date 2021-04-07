@@ -1,8 +1,16 @@
 # Module for creating file paths across operating systems.
 import os
-
 # Module for reading CSV file.
 import csv
+
+def file_output(total_months, net_total):
+
+    output_path = os.path.join("analysis", "results.txt")
+
+    with open(output_path, 'w', newline='') as txtfile:
+
+        txtfile.write(str(total_months))
+        txtfile.write(str(net_total))
 
 # The CSV file path starts where this main.py is located and then inside folder 'Resources' with file name 'budget_data'.
 csvpath = os.path.join("Resources", "budget_data.csv")
@@ -26,6 +34,8 @@ with open(csvpath) as csvfile:
         total_months += 1
         net_total += int(row[1])
 
-print(total_months)
-print(net_total)
+print(f"Total Months:  {total_months}")
+print(f"Total:  {net_total}")
+
+file_output(total_months, net_total)
 
