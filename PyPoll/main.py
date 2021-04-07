@@ -4,7 +4,7 @@ import os
 import csv
 
 # Function that looks for requires our 5 calculations and then writes those answers to a text file.
-def file_output(total_votes, net_total, avg_changes, great_profit, great_loss):
+def file_output(total_votes, candidates, votes_per, candidate_votes, winner, vote_winner):
 
 # The text file location starts where this main.py is located and then inside folder 'analysis' with the file name 'results'.
     output_path = os.path.join("analysis", "results.txt")
@@ -15,10 +15,14 @@ def file_output(total_votes, net_total, avg_changes, great_profit, great_loss):
         txtfile.write('\n' + "---------------------------------")
         txtfile.write('\n' + "Total Votes:  " + str(total_votes))
         txtfile.write('\n' + "---------------------------------")
-        txtfile.write('\n' + "Total:  $" + str(net_total))
-        txtfile.write('\n' + "Average Change:  $" + str(avg_changes))
-        txtfile.write('\n' + "Greatest Increase in Profits:  " + str(great_profit))
-        txtfile.write('\n' + "Greatest Decrease in Profits:  " + str(great_loss))
+
+        for i in range(len(candidates)):
+            txtfile.write('\n' + candidates[i] + ": " + str(votes_per[i]) + "%  (" + str(candidate_votes[i]) + ")")
+
+        txtfile.write('\n' + "---------------------------------")
+        txtfile.write('\n' + "Winner:  " + winner + "!")
+        txtfile.write('\n' + "With " + str(vote_winner) + " votes!")
+        txtfile.write('\n' + "---------------------------------")
 
 
 def candidate_checker(name, candidates):
@@ -94,5 +98,5 @@ print("---------------------------------")
 print("")
 
 # Calling the file_output function to write to the text file.
-#file_output(total_months, net_total, average_change, greatest_increase, greatest_decrease)
+file_output(total_votes, candidates, votes_per, candidate_votes, winner, vote_winner)
 
