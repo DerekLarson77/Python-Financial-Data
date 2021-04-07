@@ -1,0 +1,18 @@
+# Module for creating file paths across operating systems.
+import os
+
+# Module for reading CSV file.
+import csv
+
+# The CSV file path starts where this main.py is located and then inside folder 'Resources' with file name 'budget_data'.
+csvpath = os.path.join("Resources", "budget_data.csv")
+
+# Opening CSV file located in csvpath set prior.
+# Csvreader reads the csv file as lists(rows) within lists(columns).
+# Delimiter is so python knows what character is separating lists in each row.
+with open(csvpath) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+# Saving the header to a variable before python starts reading down the rows.
+    csv_header = next(csvreader)
+
