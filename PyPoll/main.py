@@ -45,6 +45,7 @@ with open(csvpath) as csvfile:
     #print(f"CSV Header:  {csv_header}")
 
     # Setting counting variables to zero before any math occurs.
+    csv_array = []
     total_votes = 0
     i = 0
     candidates = []
@@ -54,16 +55,16 @@ with open(csvpath) as csvfile:
     # Read each row in the CSV file.
     for row in csvreader:
         # Add one each time we get to a new row to count months.
+        csv_array.append(row)
         total_votes += 1
         name = row[2]
         candidate_checker(name, candidates)
 
 
-
     for candidate in candidates:
         i += 1
         candidate_votes.append(0)
-        for row in csvreader:
+        for row in csv_array:
             name = row[2]
             if str(candidate) == str(name):
                 candidate_count = candidate_votes[i-1] + 1
