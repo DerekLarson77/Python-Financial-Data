@@ -34,12 +34,17 @@ with open(csvpath) as csvfile:
 
     # Setting counting variables to zero before any math occurs.
     total_months = 0
+
+    ## Variables for index[0] and index[1] of the current row and the previous row
     net_previous = 0
     net_current = 0
     month_previous = ""
     month_current = ""
+
     net_total = 0
     net_changes = 0
+
+    ## Variables for month and profit/loss of both largest increase and decrease
     greatest_net_increase = 0
     greatest_month_increase = ""
     greatest_net_decrease = 0
@@ -70,7 +75,9 @@ with open(csvpath) as csvfile:
         # Continue to add up the net values of each row.
         net_total += net_current
 
-
+# Variable for cleaner print statements and to match format needed for function (file_output)
+greatest_increase = greatest_month_increase + " ($" + str(greatest_net_increase) + ")"
+greatest_decrease = greatest_month_decrease + " ($" + str(greatest_net_decrease) + ")"
 
 # Print all values to the terminal.
 print("")
@@ -79,9 +86,10 @@ print("---------------------------------")
 print(f"Total Months:  {total_months}")
 print(f"Total:  {net_total}")
 print("")
-print("Greatest Increase in Profits:  " + greatest_month_increase + " ($" + str(greatest_net_increase) + ")")
-print("Greatest Decrease in Profits:  " + greatest_month_decrease + " ($" + str(greatest_net_decrease) + ")")
+print("Greatest Increase in Profits:  " + greatest_increase)
+print("Greatest Decrease in Profits:  " + greatest_decrease)
 print("")
 
-#file_output(total_months, net_total, net_changes, greatest_increase, greatest_decrease)
+
+file_output(total_months, net_total, net_changes, greatest_increase, greatest_decrease)
 
