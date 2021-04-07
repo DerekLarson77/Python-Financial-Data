@@ -34,21 +34,54 @@ with open(csvpath) as csvfile:
 
     # Setting counting variables to zero before any math occurs.
     total_months = 0
+    net_previous = 0
+    net_current = 0
+    month_previous = ""
+    month_current = ""
     net_total = 0
     net_changes = 0
-    greatest_increase = 0
-    greatest_decrease = 0
+    greatest_net_increase = 0
+    greatest_month_increase = ""
+    greatest_net_decrease = 0
+    greatest_month_decrease = ""
 
     # Read each row in the CSV file.
     for row in csvreader:
+        # Add one each time we get to a new row to count months.
         total_months += 1
-        net_total += int(row[1])
+        # Save the value from net_current from the last row before the variable is updated.
+        net_previous = net_current
+        # Save the value from month_current from the last row before the variable is updated.
+        month_previous = month_current
+
+        # Update net_current to the current row value.
+        net_current = int(row[1])
+        # Update month_current to the current row value.
+        month_current = row[0]
+
+        if((net_current - net_previous) > greatest_net_increase):
+            greatest_net_increase = net_current - net_previous
+            greatest_month_increase = month_current
+        elif((net_current - net_previous) < greatest_net_decrease):
+            greatest_net_decrease = net_current - net_previous
+            greatest_month_decrease = month_current
+
+
+        # Continue to add up the net values of each row.
+        net_total += net_current
+
+
+
+# Print all values to the terminal.
 print("")
 print("Financial Analysis")
 print("---------------------------------")
 print(f"Total Months:  {total_months}")
 print(f"Total:  {net_total}")
 print("")
+print("Greatest Increase in Profits:  " + greatest_month_increase + " ($" + str(greatest_net_increase) + ")")
+print("Greatest Decrease in Profits:  " + greatest_month_decrease + " ($" + str(greatest_net_decrease) + ")")
+print("")
 
-file_output(total_months, net_total, net_changes, greatest_increase, greatest_decrease)
+#file_output(total_months, net_total, net_changes, greatest_increase, greatest_decrease)
 
