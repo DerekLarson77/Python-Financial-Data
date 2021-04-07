@@ -45,6 +45,9 @@ with open(csvpath) as csvfile:
     ## Variables for calculating change in profit/loss and then adding up the total.
     change_current = 0
     net_changes = 0
+    first = 0
+    last = 0
+
 
     ## Variables for month and profit/loss of both largest increase and decrease.
     greatest_net_increase = 0
@@ -66,8 +69,13 @@ with open(csvpath) as csvfile:
         # Update month_current to the current row value.
         month_current = row[0]
 
+        # An if statement to assign first to the net_current only if nothing has been assigned already.
+        if first == 0:
+            first = net_current
+
         change_current = net_current - net_previous
 
+        # If statements to check if the new change needs to be either the new greatest increase or decrease.
         if(change_current > greatest_net_increase):
             greatest_net_increase = change_current
             greatest_month_increase = month_current
@@ -79,8 +87,11 @@ with open(csvpath) as csvfile:
         net_total += net_current
         net_changes += change_current
 
+# For loop that was going through all the rows of the CSV file ended, so we know net_current is still saving the last row of the file.
+last = net_current
+
 # Calculating the average change by taking the total change divided by the total months.
-average_change = net_changes / total_months
+average_change = (last-first) / total_months
 
 # Variable for cleaner print statements and to match format needed for function (file_output).
 greatest_increase = greatest_month_increase + " ($" + str(greatest_net_increase) + ")"
@@ -97,6 +108,6 @@ print("Greatest Increase in Profits:  " + greatest_increase)
 print("Greatest Decrease in Profits:  " + greatest_decrease)
 print("")
 
-
+# Calling the file_output function to write to the text file.
 file_output(total_months, net_total, average_change, greatest_increase, greatest_decrease)
 
