@@ -15,4 +15,17 @@ with open(csvpath) as csvfile:
 
 # Saving the header to a variable before python starts reading down the rows.
     csv_header = next(csvreader)
+    #print(f"CSV Header:  {csv_header}")
+
+    total_months = 0
+    net_total = 0
+
+    # Read each row in the CSV file.
+    for row in csvreader:
+        #print(row[1])
+        #total_months += 1
+        net_total += int(row[1])
+
+#print(total_months)
+print(net_total)
 
