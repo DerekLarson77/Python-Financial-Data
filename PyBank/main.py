@@ -9,6 +9,7 @@ def file_output(total_months, net_total, net_changes, great_profit, great_loss):
 # The text file location starts where this main.py is located and then inside folder 'analysis' with the file name 'results'.
     output_path = os.path.join("analysis", "results.txt")
 
+# Opens text file and writes each row line by line.  The '\n' tells the code to write on the next line.
     with open(output_path, 'w', newline='') as txtfile:
         txtfile.write("Financial Analysis")
         txtfile.write('\n' + "---------------------------------")
