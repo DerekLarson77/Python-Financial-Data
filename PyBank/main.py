@@ -90,8 +90,8 @@ with open(csvpath) as csvfile:
 # For loop that was going through all the rows of the CSV file ended, so we know net_current is still saving the last row of the file.
 last = net_current
 
-# Calculating the average change by taking the total change divided by the total months.
-average_change = (last-first) / total_months
+# Calculating the average change by taking the total change divided by the total months minus 1, because the first month would be at time 0.
+average_change = (last-first) / (total_months - 1)
 
 # Variable for cleaner print statements and to match format needed for function (file_output).
 greatest_increase = greatest_month_increase + " ($" + str(greatest_net_increase) + ")"
