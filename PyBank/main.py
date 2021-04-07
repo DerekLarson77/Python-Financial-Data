@@ -17,15 +17,15 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     #print(f"CSV Header:  {csv_header}")
 
+    # Setting counting variables to zero before any math occurs.
     total_months = 0
     net_total = 0
 
     # Read each row in the CSV file.
     for row in csvreader:
-        #print(row[1])
-        #total_months += 1
+        total_months += 1
         net_total += int(row[1])
 
-#print(total_months)
+print(total_months)
 print(net_total)
 
