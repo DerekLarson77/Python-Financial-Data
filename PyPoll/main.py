@@ -46,8 +46,9 @@ with open(csvpath) as csvfile:
 
     # Setting counting variables to zero before any math occurs.
     total_votes = 0
+    i = 0
     candidates = []
-
+    candidate_votes = []
 
 
     # Read each row in the CSV file.
@@ -59,7 +60,16 @@ with open(csvpath) as csvfile:
 
 
 
+    for candidate in candidates:
+        i += 1
+        candidate_votes.append(0)
+        for row in csvreader:
+            if row[2] == candidate:
+                candidate_count = candidate_votes[i-1] + 1
+                candidate_votes[i-1] = candidate_count
 
+
+print(candidate_votes)
 
 
 # Print all values to the terminal.
