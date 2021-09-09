@@ -1,4 +1,4 @@
-# python-challenge
+# Python-Financial-Data
 
 	There are two problem  in this challenge that are solved:  PyBank and PyPoll.  In both of them we are given a CSV file to put in a Resources folder.
 An Analysis folder is created where the code will create a text document that will display our results as well.
